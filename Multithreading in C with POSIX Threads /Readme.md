@@ -54,26 +54,46 @@ void **retval: Pointer to store the return value of the terminated thread (optio
 
 Mutexes are used to protect shared resources from being accessed by multiple threads at the same time. pthread_mutex_lock() locks the mutex, and pthread_mutex_unlock() releases it.
 
-Mutex Initialization:
+a,Mutex Initialization:
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
-Mutex Locking:
+b,Mutex Locking:
 int pthread_mutex_lock(pthread_mutex_t *mutex);
 
 Parameters:
 pthread_mutex_t *mutex: Pointer to the mutex to be locked.
 
-Mutex Unlocking:
+c,Mutex Unlocking:
 int pthread_mutex_unlock(pthread_mutex_t *mutex);
 
+Parameter:
+pthread_mutex_t *mutex: Pointer to the mutex to be unlocked.
+
+5, Condition Variables: pthread_cond_t
+
+Condition variables allow threads to wait for specific conditions to be met, typically in conjunction with a mutex.
+
+a, Condition Variable Initialization: pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+b, Wait on Condition: int pthread_cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex);
+Parameters:
+pthread_cond_t *cond: Pointer to the condition variable.
+pthread_mutex_t *mutex: Pointer to the associated mutex. The mutex is automatically unlocked while waiting.
+c, Signal a Condition: int pthread_cond_signal(pthread_cond_t *cond);
+Parameter: pthread_cond_t *cond: Pointer to the condition variable to signal.
+
+6, Thread Attributes: pthread_attr_t
+
+Attributes control thread behavior, such as whether the thread is joinable or detached.
+
+Attribute Initialization:
+pthread_attr_t attr;
+pthread_attr_init(&attr);
 
 
-
-
-
-
-
-
+Set Detach State (Optional): pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+Parameters:
+pthread_attr_t *attr: Pointer to the thread attribute object.
+int detachstate: Set the detach state, either PTHREAD_CREATE_JOINABLE (default) or PTHREAD_CREATE_DETACHED.
 
 
 
